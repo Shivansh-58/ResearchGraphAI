@@ -1,0 +1,2 @@
+{"question":"When do access reviews happen?","context":"SOURCE [1]: Access reviews happen every quarter.","answer":"Access reviews happen every quarter. [1]","required_facts":["quarter"]}
+{"question":"How long are backups retained?","context":"SOURCE [1]: Daily backups are retained for 30 days.","answer":"Daily backups are retained for 30 days. [1]","required_facts":["30"]}

@@ -1,0 +1,74 @@
+name: researchgraph
+services:
+  ollama:
+    image: ollama/ollama:0.35.1
+    environment:
+      OLLAMA_NO_CLOUD: "1"
+      OLLAMA_HOST: "0.0.0.0:11434"
+      OLLAMA_NUM_PARALLEL: "1"
+      OLLAMA_MAX_LOADED_MODELS: "1"
+    volumes:
+      - ../models/ollama:/root/.ollama
+    networks: [private]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, ollama, list]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+  api:
+    image: researchgraph-api:0.2.0
+    build:
+      context: ..
+      dockerfile: deploy/backend.Dockerfile
+      target: runtime
+    environment:
+      RESEARCHGRAPH_DATA_DIR: /data
+      RESEARCHGRAPH_USERS_FILE: /run/secrets/users.json
+      RESEARCHGRAPH_OLLAMA_BASE_URL: http://ollama:11434
+      RESEARCHGRAPH_LLM_MODEL: ${RESEARCHGRAPH_LLM_MODEL:-qwen3:1.7b}
+      RESEARCHGRAPH_EMBEDDING_MODEL: ${RESEARCHGRAPH_EMBEDDING_MODEL:-nomic-embed-text}
+      RESEARCHGRAPH_GRAPH_PROVIDER: ${RESEARCHGRAPH_GRAPH_PROVIDER:-ollama}
+      RESEARCHGRAPH_CORS_ORIGINS: http://localhost:8080
+    volumes:
+      - knowledge:/data
+      - ../secrets/users.json:/run/secrets/users.json:ro
+      - ../models:/models:ro
+    networks: [private]
+    depends_on:
+      ollama: {condition: service_healthy}
+    restart: unless-stopped
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  web:
+    image: researchgraph-web:0.2.0
+    build:
+      context: ..
+      dockerfile: deploy/frontend.Dockerfile
+    ports: ["127.0.0.1:8080:8080"]
+    networks: [private]
+    depends_on:
+      api: {condition: service_healthy}
+    restart: unless-stopped
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  trainer:
+    profiles: [training]
+    build:
+      context: ..
+      dockerfile: deploy/training.Dockerfile
+    volumes:
+      - ../models:/models:ro
+      - ../training/datasets:/datasets:ro
+      - knowledge:/data
+    network_mode: none
+    working_dir: /project
+    entrypoint: [python, -m, training.train_adapter]
+    gpus: all
+networks:
+  private:
+    internal: true
+volumes:
+  knowledge:

@@ -1,0 +1,18 @@
+.login-shell { display: grid; place-items: center; min-height: 100vh; padding: 24px; }
+.login-card { width: min(100%, 440px); padding: 32px; background: #101e16; border: 1px solid #ffffff18; border-radius: 18px; display: grid; gap: 18px; }
+.login-card h1 { font-size: 32px; margin: 0; }
+.login-card p, .login-card small, .muted { color: #8da497; font-size: 13px; line-height: 1.7; }
+.login-card label, .share-label { font-size: 12px; display: grid; gap: 8px; color: #a7bfaf; }
+.login-card input, .share-label input { border: 1px solid #ffffff22; border-radius: 8px; padding: 12px; color: white; background: #08100d; width: 100%; }
+.system-status button, .tabs button { border: 1px solid #ffffff20; border-radius: 8px; background: transparent; color: #b8efca; padding: 8px 12px; }
+.tabs { display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap; }
+.tabs button.active { background: #b8efca; color: #08100d; }
+.source-link { padding: 0; border: 0; color: #b8efca; background: none; text-align: left; font-size: 12px; text-decoration: underline; }
+.source-full { background: #ffffff08; border-radius: 10px; padding: 18px; margin-top: 16px; font-size: 13px; line-height: 1.8; white-space: pre-wrap; }
+.job { border: 1px solid #ffffff15; padding: 10px 14px; border-radius: 9px; margin-top: 10px; font-size: 12px; color: #9ab4a4; }
+.job.failed { color: #ffaaaa; }
+.job span { display: block; margin-top: 5px; }
+.graph-view, .training { margin-top: 24px; }
+.relation { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 10px 0; padding: 16px; width: 100%; border: 1px solid #ffffff15; border-radius: 10px; background: #101e16; color: #d9f1e1; text-align: left; }
+.relation small { color: #80a18d; font-size: 9px; }
+.training article { padding: 16px; border: 1px solid #ffffff18; border-radius: 10px; }

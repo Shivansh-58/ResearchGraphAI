@@ -1,0 +1,2 @@
+{"question":"How many training days are provided?","context":"SOURCE [1]: Employees have five paid training days each year.","answer":"Employees have five paid training days each year. [1]","required_facts":["five"]}
+{"question":"Who owns Project Beacon?","context":"SOURCE [1]: Project Beacon belongs to the Platform team.","answer":"Project Beacon belongs to the Platform team. [1]","required_facts":["Platform"]}

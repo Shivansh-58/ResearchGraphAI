@@ -1,0 +1,6 @@
+# Connected model bootstrap only. Stop this configuration before loading private data.
+services:
+  ollama:
+    networks: [bootstrap]
+networks:
+  bootstrap: {}

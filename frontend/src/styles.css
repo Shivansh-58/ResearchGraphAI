@@ -1,0 +1,61 @@
+:root { font-family: "Segoe UI", system-ui, sans-serif; color: #eaf4ee; background: #08100d; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; background: radial-gradient(circle at 65% -10%, #163b2b 0, transparent 38%), #08100d; }
+button, textarea { font: inherit; }
+button { cursor: pointer; }
+header { height: 72px; border-bottom: 1px solid #ffffff13; display: flex; align-items: center; justify-content: space-between; padding: 0 34px; }
+.brand { color: white; text-decoration: none; font-weight: 700; letter-spacing: -.03em; display: flex; align-items: center; gap: 9px; }
+.brand span { display: grid; place-items: center; width: 34px; height: 34px; color: #08100d; background: #b8efca; border-radius: 9px; }
+.brand b { color: #8fa49a; font-weight: 500; }
+.system-status { font: 12px "DM Mono"; color: #94a99d; display: flex; align-items: center; gap: 8px; }
+.system-status i { width: 7px; height: 7px; border-radius: 50%; background: #72e49b; box-shadow: 0 0 12px #72e49b; }
+.shell { display: grid; grid-template-columns: 315px 1fr; min-height: calc(100vh - 72px); }
+.document-panel { border-right: 1px solid #ffffff13; padding: 28px 22px; background: #070d0bc7; }
+.panel-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 22px; }
+.eyebrow { color: #7d9b8c; text-transform: uppercase; font: 10px "DM Mono"; letter-spacing: .14em; }
+h2 { margin: 4px 0 0; font-size: 20px; }
+.count { font: 12px "DM Mono"; color: #7f9489; border: 1px solid #ffffff16; border-radius: 99px; padding: 4px 9px; }
+.upload { width: 100%; border: 1px dashed #6c9c7c66; background: #b8efca0b; color: #c8f8d7; padding: 13px; border-radius: 10px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+.upload:hover { background: #b8efca14; border-color: #85ba96; }
+.upload-hint { text-align: center; color: #5f7469; font-size: 10px; margin: 9px 0 22px; }
+.document-list { display: grid; gap: 9px; }
+.document-card { display: grid; grid-template-columns: 20px 1fr 27px; align-items: center; gap: 10px; padding: 12px; background: #ffffff07; border: 1px solid #ffffff0a; border-radius: 10px; color: #8aaa99; }
+.document-card div { min-width: 0; }
+.document-card strong, .document-card span { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.document-card strong { color: #dbe9df; font-size: 12px; margin-bottom: 4px; }
+.document-card span { font: 9px "DM Mono"; color: #698075; }
+.document-card button { background: transparent; border: 0; color: #667a70; padding: 4px; }
+.document-card button:hover { color: #ff8d8d; }
+.empty-small { color: #52675c; font-size: 12px; text-align: center; padding: 28px 12px; border: 1px solid #ffffff08; border-radius: 10px; }
+.workspace { width: min(980px, calc(100% - 60px)); margin: 0 auto; padding: 72px 0; }
+.hero h1 { font-size: clamp(36px, 5vw, 64px); line-height: 1.03; letter-spacing: -.055em; margin: 13px 0 16px; max-width: 850px; }
+.hero h1 em { font-family: Georgia, serif; color: #b8efca; font-weight: 500; }
+.hero p { color: #83988d; max-width: 650px; line-height: 1.7; font-size: 14px; }
+.query-box { margin-top: 42px; display: grid; grid-template-columns: 25px 1fr auto; gap: 14px; align-items: center; background: #f1f7f3; color: #15231c; border-radius: 15px; padding: 14px 15px 14px 19px; box-shadow: 0 20px 55px #0008; }
+.query-box textarea { resize: none; border: 0; outline: 0; background: transparent; padding: 8px 0; color: #15231c; }
+.query-box textarea::placeholder { color: #7a8a81; }
+.query-box button { border: 0; background: #163c2b; color: white; border-radius: 10px; padding: 11px 16px; display: flex; align-items: center; gap: 8px; }
+.query-box button:disabled { opacity: .5; }
+.pipeline { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 48px; border: 1px solid #ffffff10; border-radius: 13px; overflow: hidden; }
+.pipeline > div { padding: 20px; display: flex; gap: 13px; border-right: 1px solid #ffffff10; color: #779083; }
+.pipeline > div:last-child { border: 0; }
+.pipeline svg { width: 19px; }
+.pipeline span, .pipeline strong, .pipeline small, .pipeline b { display: block; }
+.pipeline b { font: 9px "DM Mono"; color: #557064; margin-bottom: 5px; }
+.pipeline strong { color: #dce9e1; font-size: 12px; }
+.pipeline small { color: #63786d; font-size: 9px; margin-top: 4px; }
+.answer-card { margin-top: 34px; border: 1px solid #ffffff12; background: #0c1712cc; border-radius: 15px; padding: 26px; }
+.answer-meta { display: flex; justify-content: space-between; align-items: center; color: #8aa396; font: 10px "DM Mono"; }
+.answer-meta span { display: flex; align-items: center; gap: 7px; }
+.confidence { color: #83d69e; }
+.answer-text { color: #e6f0e9; line-height: 1.85; margin: 24px 0; font-size: 15px; }
+.citations { border-top: 1px solid #ffffff10; padding-top: 19px; }
+.citations h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: #769084; }
+.citations article { display: grid; grid-template-columns: 25px 1fr; gap: 11px; margin-top: 15px; }
+.citation-number { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 6px; background: #b8efca; color: #102219; font: 10px "DM Mono"; }
+.citations strong { font-size: 11px; }
+.citations p { color: #72887d; font-size: 11px; line-height: 1.6; margin: 5px 0 0; }
+.citations p svg { vertical-align: -2px; margin-right: 4px; }
+.error { color: #ffabab; background: #5b202040; border: 1px solid #ff8f8f32; padding: 11px 14px; margin-top: 14px; border-radius: 9px; font-size: 12px; }
+@media (max-width: 850px) { .shell { display: block; } .document-panel { border-right: 0; border-bottom: 1px solid #ffffff13; } .document-list { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); } .workspace { padding-top: 45px; } .pipeline { grid-template-columns: 1fr 1fr; } .pipeline > div:nth-child(2) { border-right: 0; } }
+@media (max-width: 520px) { header { padding: 0 18px; } .system-status { display: none; } .workspace { width: calc(100% - 32px); } .query-box { grid-template-columns: 22px 1fr; } .query-box button { grid-column: 1 / -1; justify-content: center; } .pipeline { grid-template-columns: 1fr; } .pipeline > div { border-right: 0; border-bottom: 1px solid #ffffff10; } }

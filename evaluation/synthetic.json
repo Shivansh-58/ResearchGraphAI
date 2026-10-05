@@ -1,0 +1,12 @@
+{
+  "documents": {
+    "orion.txt": "Orion uses Atlas for its internal data processing. Orion has a document retention period of 47 days.",
+    "atlas.txt": "Atlas is managed by the Platform Operations team. Atlas depends on the Beacon database.",
+    "beacon.txt": "Beacon is an internal database. The Beacon backup frequency is every 12 hours."
+  },
+  "cases": [
+    {"id": "single-fact", "question": "What is the document retention period for Orion?", "required_facts": ["47"], "expected_documents": ["orion.txt"]},
+    {"id": "cross-document", "question": "Which team manages Atlas, the service used by Orion?", "required_facts": ["Platform Operations"], "expected_documents": ["orion.txt", "atlas.txt"]},
+    {"id": "missing-evidence", "question": "Who invented the nebular ice engine on Gliese 581g?", "should_abstain": true}
+  ]
+}

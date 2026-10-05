@@ -1,0 +1,44 @@
+name: Validate ResearchGraph
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with: {version: "0.11.21"}
+      - uses: actions/setup-node@v4
+        with: {node-version: "24"}
+      - run: uv sync --project backend --extra dev --extra faiss
+      - run: uv run --project backend ruff check backend/app backend/tests scripts training --config backend/pyproject.toml
+      - run: cd backend && uv run pytest
+      - run: cd frontend && npm ci --no-audit --no-fund && npm run build
+      - run: docker compose -f deploy/compose.yaml config --quiet
+      - run: docker compose -f deploy/compose.yaml -f deploy/compose.gpu.yaml config --quiet
+      - run: docker compose -f deploy/compose.yaml -f deploy/compose.setup.yaml config --quiet
+      - run: docker compose -f deploy/compose.yaml -f deploy/compose.adapter.yaml config --quiet
+        env: {RESEARCHGRAPH_ADAPTER_RUN: validated-run}
+      - run: docker compose -f deploy/compose.yaml build api web
+      - run: |
+          uv venv .training-venv --python 3.12
+          uv pip install --python .training-venv/bin/python -r training/requirements.txt
+          .training-venv/bin/python -m scripts.verify_training --output data/ci-training-smoke
+  container-smoke:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with: {version: "0.11.21"}
+      - run: uv sync --project backend --extra dev
+      - run: uv run --project backend python scripts/bootstrap.py
+      - run: sh scripts/install.sh
+      - run: |
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://localhost:8080/health; then break; fi
+            sleep 2
+          done
+          uv run --project backend python scripts/verify_local.py --url http://localhost:8080
+      - if: always()
+        run: docker compose -f deploy/compose.yaml down

@@ -1,0 +1,10 @@
+services:
+  api:
+    build:
+      target: adapters
+    environment:
+      RESEARCHGRAPH_LLM_PROVIDER: transformers
+      RESEARCHGRAPH_MODEL_DIR: /models/base
+      RESEARCHGRAPH_ADAPTER_DIR: /data/training-runs/${RESEARCHGRAPH_ADAPTER_RUN:?Set an evaluated adapter run}/adapter
+      RESEARCHGRAPH_GRAPH_PROVIDER: rules
+    gpus: all

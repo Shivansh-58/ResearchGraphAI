@@ -1,0 +1,45 @@
+# Private configuration and credentials
+.env
+.env.*
+!.env.example
+/secrets/
+*.token
+
+# Local knowledge, model weights, adapters and private training examples
+/data/
+/models/
+/training/datasets/
+/offline-bundles/
+
+# Dependencies and portable runtimes
+.venv/
+/.training-venv/
+/.runtime/
+/.uv-cache/
+/.pnpm-store/
+node_modules/
+/frontend/dist/
+
+# Python caches, tests and coverage
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+**/pytest-cache-files-*/
+/backend/tests/runtime/
+/backend/tests/.tmp/
+/tmp/
+
+# Generated TypeScript configuration output
+*.tsbuildinfo
+/frontend/vite.config.js
+/frontend/vite.config.d.ts
+
+# Logs and operating-system metadata
+*.log
+.DS_Store
+Thumbs.db
